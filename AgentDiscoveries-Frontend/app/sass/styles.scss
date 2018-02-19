@@ -1,6 +1,5 @@
 $background-color: rgb(238, 238, 238);
 $text-color: rgb(12, 12, 12);
-
 body {
   background-color: $background-color;
   color: $text-color;
@@ -10,4 +9,12 @@ body {
   height: 100%;
   display: inline-block;
   padding-right: 8px;
+}
+
+.form-section-inline {
+  margin-right: 8px;
+}
+
+.button-inline {
+  margin-right: 8px;
 }
