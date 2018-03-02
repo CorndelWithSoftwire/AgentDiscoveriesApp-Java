@@ -81,6 +81,6 @@ export function deleteAPI (apiAddress, id) {
   });
 }
 
-function getTokenHeader () {
+export function getTokenHeader () {
   return `Bearer ${window.localStorage.getItem('Token')}`;
 }

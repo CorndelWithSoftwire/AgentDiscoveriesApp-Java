@@ -28,7 +28,7 @@ export function getEntity (api, id) {
     });
 }
 
-function filterResults (results) {
+export function filterResults (results) {
   results.forEach(val => {
     delete val.hashedPassword; // we don't want this to be rendered
     if (val.admin) {
@@ -38,7 +38,8 @@ function filterResults (results) {
 
   return results;
 }
-function filterResult (result) {
+
+export function filterResult (result) {
   delete result.hashedPassword; // we don't want this to be rendered
   if (result.admin) {
     result.admin = 'yes';

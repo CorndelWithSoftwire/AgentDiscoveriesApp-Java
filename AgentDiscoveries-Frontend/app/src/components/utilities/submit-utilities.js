@@ -45,7 +45,7 @@ export function handleEntityEdit (apiAddress, id, submitForm) {
     });
 }
 
-function getBodyJSON (submitForm) {
+export function getBodyJSON (submitForm) {
   const bodyJSON = {};
   Object.keys(submitForm).forEach((key) => {
     if (submitForm[key]) {
