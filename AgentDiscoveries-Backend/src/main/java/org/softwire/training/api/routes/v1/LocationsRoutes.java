@@ -1,6 +1,7 @@
 package org.softwire.training.api.routes.v1;
 
 import org.softwire.training.api.core.JsonRequestUtils;
+import org.softwire.training.api.core.PermissionsVerifier;
 import org.softwire.training.api.models.ErrorCode;
 import org.softwire.training.api.models.FailedRequestException;
 import org.softwire.training.db.daos.LocationsDao;
@@ -20,17 +21,20 @@ public class LocationsRoutes implements EntityCRUDRoutes {
 
     private final LocationsDao locationsDao;
     private final RegionsDao regionsDao;
+    private final PermissionsVerifier permissionsVerifier;
     private Request req;
     private Response res;
 
     @Inject
-    public LocationsRoutes(LocationsDao locationsDao, RegionsDao regionsDao) {
+    public LocationsRoutes(LocationsDao locationsDao, RegionsDao regionsDao, PermissionsVerifier permissionsVerifier) {
         this.locationsDao = locationsDao;
         this.regionsDao = regionsDao;
+        this.permissionsVerifier = permissionsVerifier;
     }
 
     @Override
     public Location createEntity(Request req, Response res) throws FailedRequestException {
+        permissionsVerifier.verifyAdminPermission(req);
         Location location = JsonRequestUtils.readBodyAsType(req, Location.class);
 
         if (location.getLocationId() != 0) {
@@ -65,7 +69,7 @@ public class LocationsRoutes implements EntityCRUDRoutes {
         Location location = JsonRequestUtils.readBodyAsType(req, Location.class);
 
         if (location.getLocationId() != id && location.getLocationId() != 0) {
-            throw new FailedRequestException(ErrorCode.INVALID_INPUT, "userId cannot be specified differently to URI");
+            throw new FailedRequestException(ErrorCode.INVALID_INPUT, "locationId cannot be specified differently to URI");
         }
         // Perform validations of model before storing
         validateLocationModel(location);
