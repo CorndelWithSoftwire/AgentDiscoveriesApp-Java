@@ -297,7 +297,7 @@
                         <target.address>${target.address}</target.address>
                     </systemPropertyVariables>
                 </configuration>
-                <version>2.20.1</version>
+                <version>2.22.2</version>
                 <executions>
                     <execution>
                         <goals>
