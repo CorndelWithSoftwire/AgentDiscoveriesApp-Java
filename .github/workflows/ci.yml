@@ -1,0 +1,13 @@
+name: To Do app CI & CD
+on: [push, pull_request]
+
+jobs:
+  build-and-test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - run: mvn clean package
+    - run: docker compose up --detach
+    - run: java -jar AgentDiscoveries-Backend/target/agentdiscoveries-backend-1.0-SNAPSHOT.jar &
+    - run: mvn verify -P integration-test-local
