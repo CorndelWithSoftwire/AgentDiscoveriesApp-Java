@@ -5,7 +5,7 @@ let events = [];
 
 before(() => {
     global.window.dispatchEvent = (event) => {
-        events.push(event.name);
+        events.push(event.type);
     };
 });
 

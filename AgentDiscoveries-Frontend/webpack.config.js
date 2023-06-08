@@ -8,6 +8,7 @@ const outputPath = path.join(__dirname, 'target', 'classes', 'frontend');
 
 module.exports = {
     entry: './app/src/index.jsx',
+    mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
 
     resolve: {
         extensions: ['.js', '.jsx']
@@ -20,7 +21,6 @@ module.exports = {
                 {
                     loader: MiniCssExtractPlugin.loader,
                     options: {
-                        hmr: process.env.NODE_ENV === 'development',
                     }
                 },
                 "css-loader",
@@ -49,7 +49,7 @@ module.exports = {
     ],
 
     devServer: {
-        contentBase: outputPath,
+        static: outputPath,
         port: 8081,
         proxy: {
             '/v1': {
