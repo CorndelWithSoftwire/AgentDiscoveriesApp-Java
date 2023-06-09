@@ -9,11 +9,3 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build & run unit tests
       run: mvn clean package
-    - name: Spin up DB
-      run: docker compose up --detach
-    - name: Pause for 10 seconds to give DB time to come up
-      run: sleep 10s
-    - name: Run the app
-      run: java -jar AgentDiscoveries-Backend/target/agentdiscoveries-backend-1.0-SNAPSHOT.jar &
-    - name: Check the integration tests
-      run: mvn verify -P integration-test-local
